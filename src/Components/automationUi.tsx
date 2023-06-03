@@ -9,7 +9,7 @@ import getScript from "~useFullFunctions/getScript"
 
 import initialState from "../Data/InitialState"
 
-function AutomationUi({ currentPageUrl }) {
+function AutomationUi({ currentPageUrl }: { currentPageUrl: string }) {
   const [data, setData] = useStorage(
     extractProjectNumber(currentPageUrl) + "data",
     structuredClone(initialState)
@@ -69,7 +69,10 @@ function AutomationUi({ currentPageUrl }) {
   const handleDoneButtonClick = useCallback(
     (
       event: React.MouseEvent<HTMLLabelElement, MouseEvent>,
-      { projectType: projectTypeClicked, taskName: taskNameClicked }
+      {
+        projectType: projectTypeClicked,
+        taskName: taskNameClicked
+      }: { projectType: string; taskName: string }
     ) => {
       event.stopPropagation()
 
@@ -100,7 +103,7 @@ function AutomationUi({ currentPageUrl }) {
   )
 
   const handleScriptButtonOnClick = useCallback(
-    ({ scriptName }) => {
+    ({ scriptName }: { scriptName: string }) => {
       const functionToExecute = getScript(scriptName)
       functionToExecute()
     },
